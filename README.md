@@ -1,2 +1,1 @@
-# vilya-blog
-Code related to the articles published on the [vilya.pl](https://vilya.pl) blog.
+[Proof of concept for the CVE-2021-35042 vulnerability (SQL injection in Django)](hackme-CVE-2021-35042)
