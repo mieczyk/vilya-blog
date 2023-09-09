@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Login{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form action="{{ request.path }}" method="post" name="login_form">
+    <p>
+      <input type="text" placeholder="Login" name="login" id="login">
+    </p>
+    <p>
+      <input type="password" placeholder="Password" name="password" id="password">
+    </p>
+
+    <input class="button" type="submit" value="Submit" id="submit" name="submit">
+  </form>
+{% endblock %}
