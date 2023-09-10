@@ -2,10 +2,16 @@ import logging
 from functools import wraps
 
 from flask import (Flask, flash, redirect, render_template, request, session,
-                   url_for)
+                   url_for, Response)
+from flask_cors import CORS
 
 # Flask app's configuration
 app = Flask(__name__)
+
+# Make the app vulnerable by allowing CORS (Cross Origin Resource Sharing)
+# for all domains on all routes.
+CORS(app)
+
 app.logger.setLevel(logging.INFO)
 
 # Required when using session.
@@ -25,14 +31,33 @@ def login_required(f):
     def decorator_function(*args, **kwargs):
         if session.get("logged_in", False):
             return f(*args, **kwargs)
+        app.logger.warning("Unauthorized access attempt!")
         return redirect(url_for("login"))
 
     return decorator_function
 
 
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        res = Response()
+        res.headers['Access-Control-Allow-Origin'] = 'http://localhost:8080'
+        res.headers['Access-Control-Allow-Credentials'] = "true"
+        res.headers['Access-Control-Allow-Headers'] = "*"
+        print(res)
+        return res
+
+
 @app.route("/", methods=["GET"])
 def home():
     return render_template("home.html")
+
+
+# Page with exploit that sends malicious requests
+# within the same domain.
+@app.route("/exploit", methods=["GET"])
+def exploit():
+    return render_template("exploit.html")
 
 
 @app.route("/login", methods=["GET", "POST"])

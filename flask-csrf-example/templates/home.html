@@ -5,5 +5,11 @@
 {% endblock %}
 
 {% block content %}
+  <p>
     Hello! This is an example of CSRF vulnerable application written in Flask (Python).
+  </p>
+  <p>
+    Visit the <a href="{{ url_for('exploit') }}">Exploit</a> page once you're signed in to 
+    simulate the malicious CSRF requests.
+  </p>
 {% endblock %}
