@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # Make the app vulnerable by allowing CORS (Cross Origin Resource Sharing)
 # for all domains on all routes.
-CORS(app)
+CORS(app, supports_credentials=True)
 
 app.logger.setLevel(logging.INFO)
 
@@ -35,17 +35,6 @@ def login_required(f):
         return redirect(url_for("login"))
 
     return decorator_function
-
-
-@app.before_request
-def handle_preflight():
-    if request.method == "OPTIONS":
-        res = Response()
-        res.headers['Access-Control-Allow-Origin'] = 'http://localhost:8080'
-        res.headers['Access-Control-Allow-Credentials'] = "true"
-        res.headers['Access-Control-Allow-Headers'] = "*"
-        print(res)
-        return res
 
 
 @app.route("/", methods=["GET"])
