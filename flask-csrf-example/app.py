@@ -1,8 +1,8 @@
 import logging
 from functools import wraps
 
-from flask import (Flask, flash, redirect, render_template, request, session,
-                   url_for, Response)
+from flask import (Flask, Response, flash, redirect, render_template, request,
+                   session, url_for)
 from flask_cors import CORS
 
 # Flask app's configuration
