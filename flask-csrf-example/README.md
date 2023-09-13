@@ -89,7 +89,7 @@ I tried to simulate the CSRF requests from another domain with the following ste
 ```
 127.0.0.1   csrf
 ```
-2. Change the URLs in the `templates/exploit.html` template, from `http://localhost:5000` to `http://csrf:500` (as defined
+2. Change the URLs in the `templates/exploit.html` template, from `http://localhost:5000` to `http://csrf:5000` (as defined
    in the `/etc/hosts` file).
 3. Set up the CORS policy that allows requests from all domains:
 ```python
